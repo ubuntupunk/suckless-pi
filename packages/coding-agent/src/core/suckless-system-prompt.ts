@@ -1,5 +1,5 @@
 /**
- * System prompt construction and project context loading
+ * Suckless system prompt construction with minimalist philosophy
  */
 
 import { getDocsPath, getExamplesPath, getReadmePath } from "../config.js";
@@ -16,7 +16,7 @@ const toolDescriptions: Record<string, string> = {
 	ls: "List directory contents",
 };
 
-export interface BuildSystemPromptOptions {
+export interface BuildSucklessSystemPromptOptions {
 	/** Custom system prompt (replaces default). */
 	customPrompt?: string;
 	/** Tools to include in prompt. Default: [read, bash, edit, write] */
@@ -31,8 +31,8 @@ export interface BuildSystemPromptOptions {
 	skills?: Skill[];
 }
 
-/** Build the system prompt with tools, guidelines, and context */
-export function buildSystemPrompt(options: BuildSystemPromptOptions = {}): string {
+/** Build the system prompt with Suckless philosophy */
+export function buildSucklessSystemPrompt(options: BuildSucklessSystemPromptOptions = {}): string {
 	const {
 		customPrompt,
 		selectedTools,
@@ -98,7 +98,7 @@ export function buildSystemPrompt(options: BuildSystemPromptOptions = {}): strin
 	const tools = (selectedTools || ["read", "bash", "edit", "write"]).filter((t) => t in toolDescriptions);
 	const toolsList = tools.length > 0 ? tools.map((t) => `- ${t}: ${toolDescriptions[t]}`).join("\n") : "(none)";
 
-	// Build guidelines based on which tools are actually available
+	// Build guidelines based on Suckless philosophy
 	const guidelinesList: string[] = [];
 
 	const hasBash = tools.includes("bash");
@@ -108,6 +108,12 @@ export function buildSystemPrompt(options: BuildSystemPromptOptions = {}): strin
 	const hasFind = tools.includes("find");
 	const hasLs = tools.includes("ls");
 	const hasRead = tools.includes("read");
+
+	// Suckless philosophy guidelines
+	guidelinesList.push("Follow the Suckless philosophy: minimalism, simplicity, and clarity");
+	guidelinesList.push("If a solution can be simple, don't make it complex");
+	guidelinesList.push("Code is a liability - keep it small to minimize attack surface and cognitive load");
+	guidelinesList.push("Simplicity is stability - fewer moving parts mean fewer points of failure");
 
 	// File exploration guidelines
 	if (hasBash && !hasGrep && !hasFind && !hasLs) {
@@ -137,12 +143,6 @@ export function buildSystemPrompt(options: BuildSystemPromptOptions = {}): strin
 			"When summarizing your actions, output plain text directly - do NOT use cat or bash to display what you did",
 		);
 	}
-
-	// Suckless philosophy guidelines
-	guidelinesList.push("Follow the Suckless philosophy: minimalism, simplicity, and clarity");
-	guidelinesList.push("If a solution can be simple, don't make it complex");
-	guidelinesList.push("Code is a liability - keep it small to minimize attack surface and cognitive load");
-	guidelinesList.push("Simplicity is stability - fewer moving parts mean fewer points of failure");
 
 	// Always include these
 	guidelinesList.push("Be concise in your responses");
