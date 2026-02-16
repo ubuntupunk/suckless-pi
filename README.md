@@ -1,8 +1,29 @@
-# 🏖️ OSS Vacation
+# Suckless Pi
 
-**Issue tracker and PRs reopen February 23, 2026.**
+> "Software is like entropy. It is difficult to grasp, weighs nothing, and obeys the Second Law of Thermodynamics; i.e., it always increases." — Norman Augustine
 
-All PRs will be auto-closed until then. Approved contributors can submit PRs after vacation without reapproval. For support, join [Discord](https://discord.com/invite/3cU7Bz4UPx).
+In the world of AI agents, entropy is the default state. Extensions are added as "hacks," system prompts grow into bloated monologues, and dependencies form opaque chains of "instruction slop."
+
+**Suckless Pi** is a rejection of this entropy. It is an application of the [Suckless Philosophy](https://suckless.org/) to the personal AI stack.
+
+## Philosophy
+
+### 1. Minimalist Core
+If a tool can be a shell script, it shouldn't be an npm package. If a prompt can be a single sentence, it shouldn't be a paragraph. We strip away the "AI-generated boilerplate" to find the functional core.
+
+### 2. Sovereignty over Consumption
+Relying on upstream `main` branches makes you a consumer of drift. We vendor our tools locally. We audit every line. We own our internal monologue. Your agent's "voice" should not change because a 3rd party decided to "optimize" their prompt.
+
+### 3. Auditability
+A "suckless" extension is one that can be audited in a single sitting. If you cannot read the entire source of your agent's tools in 5 minutes, you are running code you don't understand and logic you don't control.
+
+### 4. The Craft of the Curator
+We move from "functional velocity" (make it work at any cost) to "sovereign craft" (make it elegant, minimal, and stable). Every item in this repository is here for a reason. If the reason disappears, the code follows.
+
+### 5. Principles
+- **Code is a liability**: Keep it small to minimize the attack surface and the cognitive load.
+- **Simplicity is stability**: Fewer moving parts mean fewer points of failure in the chat loop.
+- **Vetting over Updating**: We cherry-pick features and pin them. We don't follow the stream; we build the dam.
 
 ---
 
@@ -21,7 +42,7 @@ All PRs will be auto-closed until then. Approved contributors can submit PRs aft
   <a href="https://exe.dev"><img src="packages/coding-agent/docs/images/exy.png" alt="Exy mascot" width="48" /><br />exe.dev</a>
 </p>
 
-# Pi Monorepo
+## Pi Monorepo
 
 > **Looking for the pi coding agent?** See **[packages/coding-agent](packages/coding-agent)** for installation and usage.
 
@@ -41,6 +62,12 @@ Tools for building AI agents and managing LLM deployments.
 
 ## Contributing
 
+This is a downstream repository derived from the original [pi-mono](https://github.com/badlogic/pi-mono) project.
+
+- For issues and PRs directly related to this downstream repository (such as suckless-specific modifications, local extensions, or downstream-only features), please submit them here.
+- For general issues or improvements that benefit the upstream project, please submit PRs to the [original pi-mono repository](https://github.com/badlogic/pi-mono) first.
+- Only submit PRs to this repository if they are specifically related to the suckless philosophy implementation or downstream-specific changes.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [AGENTS.md](AGENTS.md) for project-specific rules (for both humans and agents).
 
 ## Development
@@ -58,3 +85,5 @@ npm run check        # Lint, format, and type check
 ## License
 
 MIT
+
+This project is a downstream derivation of the original [pi-mono](https://github.com/badlogic/pi-mono) project, which is also licensed under MIT. All original licensing terms remain in effect for the underlying codebase.
