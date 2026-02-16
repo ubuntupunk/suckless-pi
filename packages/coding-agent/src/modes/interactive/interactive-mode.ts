@@ -581,10 +581,31 @@ export class InteractiveMode {
 			const data = (await response.json()) as { version?: string };
 			const latestVersion = data.version;
 
-			if (latestVersion && latestVersion !== this.version) {
-				return latestVersion;
+			if (!latestVersion) return undefined;
+
+			// Compare versions properly - extract base version (strip suffixes like -suckless.1)
+			const currentBaseVersion = this.version.split("-")[0];
+			const latestBaseVersion = latestVersion.split("-")[0];
+
+			// Parse version parts for comparison
+			const parseVersion = (v: string): number[] => {
+				return v.split(".").map((part) => parseInt(part, 10) || 0);
+			};
+
+			const currentParts = parseVersion(currentBaseVersion);
+			const latestParts = parseVersion(latestBaseVersion);
+
+			// Compare major.minor.patch
+			for (let i = 0; i < 3; i++) {
+				if (latestParts[i] > currentParts[i]) {
+					return latestVersion;
+				}
+				if (latestParts[i] < currentParts[i]) {
+					return undefined;
+				}
 			}
 
+			// Same version - no update needed
 			return undefined;
 		} catch {
 			return undefined;
