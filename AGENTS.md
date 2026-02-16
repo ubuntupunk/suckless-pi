@@ -1,4 +1,12 @@
-# Development Rules
+# Suckless Pi Development Rules
+
+This is a downstream repository derived from the original [pi-mono](https://github.com/badlogic/pi-mono) project, implementing the Suckless philosophy for AI agents.
+
+## Philosophy
+- **Minimalist Core**: If a tool can be a shell script, it shouldn't be an npm package. If a prompt can be a single sentence, it shouldn't be a paragraph.
+- **Sovereignty over Consumption**: We vendor our tools locally and audit every line. Your agent's "voice" should not change because a 3rd party decided to "optimize" their prompt.
+- **Auditability**: Every change should be understandable in a single sitting.
+- **Principled Development**: Keep code small to minimize attack surface and cognitive load.
 
 ## First Message
 If the user did not give you a concrete task in their first message,
@@ -46,6 +54,10 @@ When closing issues via commit:
 - This automatically closes the issue when the commit is merged
 
 ## PR Workflow
+- This is a downstream repository derived from the original [pi-mono](https://github.com/badlogic/pi-mono) project.
+- For issues and PRs directly related to this downstream repository (such as suckless-specific modifications, local extensions, or downstream-only features), work on them here.
+- For general issues or improvements that benefit the upstream project, submit PRs to the [original pi-mono repository](https://github.com/badlogic/pi-mono) first.
+- Only work on PRs in this repository if they are specifically related to the suckless philosophy implementation or downstream-specific changes.
 - Analyze PRs without pulling locally first
 - If the user approves: create a feature branch, pull PR, rebase on main, apply adjustments, commit, merge into main, push, close PR, and leave a comment in the user's tone
 - You never open PRs yourself. We work in feature branches until everything is according to the user's requirements, then merge into main, and push.
@@ -62,8 +74,8 @@ To test pi's TUI in a controlled terminal environment:
 # Create tmux session with specific dimensions
 tmux new-session -d -s pi-test -x 80 -y 24
 
-# Start pi from source
-tmux send-keys -t pi-test "cd /Users/badlogic/workspaces/pi-mono && ./pi-test.sh" Enter
+# Start pi from source (suckless-pi downstream repository)
+tmux send-keys -t pi-test "cd /path/to/suckless-project/suckless-pi && ./pi-test.sh" Enter
 
 # Wait for startup, then capture output
 sleep 3 && tmux capture-pane -t pi-test -p
