@@ -15,6 +15,39 @@ In the world of AI agents, entropy is the default state. Extensions are added as
 
 **Suckless Pi** is a rejection of this entropy. It is an application of the [Suckless Philosophy](https://suckless.org/) to the personal AI stack.
 
+## Branch Strategy
+
+This is a **suckless fork** of the upstream [badlogic/pi-mono](https://github.com/badlogic/pi-mono) repository.
+
+```
+main          → Tracks upstream (badlogic/pi-mono), no local commits
+suckless-main → Stable suckless branch, can be PR'd to upstream
+suckless-dev  → Active development branch (default)
+```
+
+### Why This Structure?
+
+1. **`main`** stays clean to pull upstream updates without conflicts
+2. **`suckless-main`** contains our stable, tested changes
+3. **`suckless-dev`** is where we do active development
+
+### Workflow
+
+```bash
+# Pull upstream changes
+git checkout main
+git pull upstream main
+git push origin main
+
+# Rebase suckless-main on updated main
+git checkout suckless-main
+git rebase main
+
+# Continue development
+git checkout suckless-dev
+# ... make changes, commit, etc.
+```
+
 ## Philosophy
 
 ### 1. Minimalist Core
