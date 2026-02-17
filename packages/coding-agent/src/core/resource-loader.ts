@@ -378,6 +378,8 @@ export class DefaultResourceLoader implements ResourceLoader {
 			? cliEnabledExtensions
 			: this.mergePaths(enabledExtensions, cliEnabledExtensions);
 
+		// Create a proper runtime with no-op implementations instead of throwing stubs
+		// This allows extensions to load without errors, methods are wired up properly in bindCore()
 		const extensionsResult = await loadExtensions(extensionPaths, this.cwd, this.eventBus);
 		const inlineExtensions = await this.loadExtensionFactories(extensionsResult.runtime);
 		extensionsResult.extensions.push(...inlineExtensions.extensions);

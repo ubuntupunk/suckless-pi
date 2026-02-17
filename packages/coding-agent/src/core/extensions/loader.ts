@@ -101,28 +101,25 @@ function resolvePath(extPath: string, cwd: string): string {
 type HandlerFn = (...args: unknown[]) => Promise<unknown>;
 
 /**
- * Create a runtime with throwing stubs for action methods.
+ * Create a runtime with no-op implementations for action methods.
  * Runner.bindCore() replaces these with real implementations.
+ * No-op allows extensions to load without errors during initialization.
  */
 export function createExtensionRuntime(): ExtensionRuntime {
-	const notInitialized = () => {
-		throw new Error("Extension runtime not initialized. Action methods cannot be called during extension loading.");
-	};
-
 	return {
-		sendMessage: notInitialized,
-		sendUserMessage: notInitialized,
-		appendEntry: notInitialized,
-		setSessionName: notInitialized,
-		getSessionName: notInitialized,
-		setLabel: notInitialized,
-		getActiveTools: notInitialized,
-		getAllTools: notInitialized,
-		setActiveTools: notInitialized,
-		getCommands: notInitialized,
-		setModel: () => Promise.reject(new Error("Extension runtime not initialized")),
-		getThinkingLevel: notInitialized,
-		setThinkingLevel: notInitialized,
+		sendMessage: () => {},
+		sendUserMessage: () => {},
+		appendEntry: () => {},
+		setSessionName: () => {},
+		getSessionName: () => undefined,
+		setLabel: () => {},
+		getActiveTools: () => [],
+		getAllTools: () => [],
+		setActiveTools: () => {},
+		getCommands: () => [],
+		setModel: () => Promise.resolve(false),
+		getThinkingLevel: () => "off" as const,
+		setThinkingLevel: () => {},
 		flagValues: new Map(),
 		pendingProviderRegistrations: [],
 	};
